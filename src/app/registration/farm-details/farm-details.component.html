@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Fill out the Farm Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [formGroup]="detailsForm">
+    <div class="row">
+      <mat-form-field class="col-8" appearance="standard">
+        <mat-label>Farm Name</mat-label>
+        <input matInput placeholder="Farm Name" formControlName="farmName" required>
+      </mat-form-field>
+    </div>
+    <div class="row ">
+      <mat-form-field class="col-4" appearance="standard">
+        <mat-label>Phone Number</mat-label>
+        <input matInput placeholder="Phone Number" formControlName="phoneNumber" required>
+      </mat-form-field>
+      <mat-form-field class="col-8" appearance="standard">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" required>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mt-3" formGroupName="address">
+      <h3 class="title mb-0">Farm address</h3>
+      <div class="row row-cols-1">
+        <mat-form-field appearance="standard">
+          <mat-label>Address1</mat-label>
+          <input matInput placeholder="Address1" formControlName="address1" required>
+        </mat-form-field>
+      </div>
+      <div class="row row-cols-1">
+        <mat-form-field appearance="standard">
+          <mat-label>Address2</mat-label>
+          <input matInput placeholder="Address2" formControlName="address2" required>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-5" appearance="standard">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="State" formControlName="state" required>
+        </mat-form-field>
+        <mat-form-field class="col-md-4" appearance="standard">
+          <mat-label>PinCode</mat-label>
+          <input matInput type="number" placeholder="PinCode" formControlName="pincode" required>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <mat-form-field class="col-8" appearance="standard">
+        <mat-label>Farm Type</mat-label>
+        <mat-select matInput placeholder="Farm Type" formControlName="farmType" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let item of farmTypes" [value]="item.value">{{item.displayValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-3" appearance="standard">
+        <mat-label>Total Area</mat-label>
+        <input matInput type="number" placeholder="Total Area" formControlName="area" required>
+      </mat-form-field>
+      <mat-form-field class="col-3" appearance="standard">
+        <mat-label>Stocking Capacity</mat-label>
+        <input matInput type="number" placeholder="Stocking Capacity" formControlName="capacity" required>
+      </mat-form-field>
+      <mat-form-field class="col-5" appearance="standard">
+        <mat-label>Water Table</mat-label>
+        <input matInput type="text" placeholder="Water Table" formControlName="waterTable" required>
+      </mat-form-field>
+    </div>
+    <div class="row ">
+      <mat-form-field class="col-8" appearance="standard">
+        <mat-label>Source of Water</mat-label>
+        <textarea matInput type="text" placeholder="Source of Water" formControlName="waterSource" required></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="row justify-content-md-end">
+      <button class="col-2 mb-3 me-5 " mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="navbar navbar-expand-lg ps-5 pe-5 mb-3">
+  <div class="container-fluid">
+    <a mat-button color="accent" disableRipple class="navbar-brand" [routerLink]="['/home']">Poultry Management</a>
+    <div class="collapse navbar-collapse" id="navbarCollapseContent">
+      <ul class="nav navbar-nav">
+        <li>
+          <a mat-button [routerLink]="['/home']" routerLinkActive="active">Home</a>
+        </li>
+        <li>
+          <a mat-button [routerLink]="['/register-farm']" routerLinkActive="active">Register</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-right nav-item dropdown">
+      <a mat-flat-button color="accent" routerLink="user/login" *ngIf="!currentUser">Login</a>
+      <user-profile-popup *ngIf="!!currentUser" [user]="currentUser" (logout)="logout()"></user-profile-popup>
+    </div>
+  </div>
+</mat-toolbar>

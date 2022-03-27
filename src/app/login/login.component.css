@@ -1,0 +1,12 @@
+mat-card {
+    padding: 60px 50px 40px 50px;
+    border-radius: 10px;
+    width: 380px;
+    box-shadow: 1px 1px 10px 1px rgb(0 0 0 / 20%) !important;
+}
+
+mat-form-field {
+    min-width: 100%;
+    max-width: 300px;
+    width: 100%;
+}

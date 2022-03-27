@@ -1,0 +1,30 @@
+.profile-btn {
+    color: white;
+    padding: 10px;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.profile-header,
+.profile-footer {
+    min-width: 250px;
+    padding: 16px;
+    text-align: center;
+}
+
+.profile-avatar {
+    height: 96px;
+    width: 96px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: linear-gradient(
+        180deg,
+        rgba(105, 78, 214, 1),
+        rgba(193, 55, 162, 1)
+    );
+    margin-bottom: 16px;
+}

@@ -1,0 +1,7 @@
+li > .active {
+    color: #ff4081 !important;
+}
+
+a[mat-button]:hover {
+    color: #ff4081;
+}

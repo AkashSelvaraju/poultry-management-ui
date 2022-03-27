@@ -1,0 +1,22 @@
+<div *ngIf="!!user">
+  <a class="profile-btn" [mat-menu-trigger-for]="profileMenu">Welcome
+    {{user.firstName}}</a>
+  <mat-menu #profileMenu="matMenu" class="user-profile">
+    <div class="profile-header">
+      <div class="profile-avatar mat-display-2">{{user.firstName[0] |
+        uppercase}}{{user.lastName[0] | uppercase}}</div>
+      <div class="mat-title mb-0">{{user.firstName}} {{user.lastName}}</div>
+      <span class="mat-caption">{{user.email}}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile-footer">
+      <a mat-button color="primary" [routerLink]="['/user/profile',user.id]">
+        View profile
+      </a>
+      <button mat-flat-button color="primary" (click)="logout.emit()">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
+    </div>
+  </mat-menu>
+</div>

@@ -1,0 +1,36 @@
+<div class="row-cols-1 ">
+  <div class="col" [formGroup]="addUserForm">
+    <table formArrayName="userArray" mat-table [dataSource]="userArray.controls" class="mat-elevation-z8">
+
+      <ng-container *ngFor="let column of userFields" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+        <td class="p-3" mat-cell *matCellDef="let user; let i= index" [formGroupName]="i">
+          <mat-form-field floatLabel='never'>
+            <input matInput type="text" [value]="user.controls[column].value" [placeholder]="column"
+              [formControlName]="column" required autofocus />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <td class="p-3" mat-cell *matCellDef="let user; let i= index" [formGroupName]="i">
+          <button mat-icon-button (click)="remove(i)">
+            <mat-icon color="warn">cancel</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="userFields; sticky:true"></tr>>
+      <tr mat-row *matRowDef="let user; let i=index; columns:displayColumns;"></tr>>
+    </table>
+  </div>
+  <div class="col mt-3">
+    <button class="me-3" mat-raised-button color="primary" (click)="save()">
+      <mat-icon>save</mat-icon>
+      SaveAll
+    </button>
+    <button mat-raised-button color="accent" (click)="addUser();">
+      <mat-icon>add</mat-icon>
+      Add
+    </button>
+  </div>
+</div>

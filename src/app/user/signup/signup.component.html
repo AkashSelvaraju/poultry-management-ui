@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center mt-lg-5 ">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>SignUp</mat-card-title>
+    </mat-card-header>
+    <div *ngIf="signupFailed['userTaken']" class="alert alert-warning">
+      User already exists! <a [routerLink]="['/user/login']" class="fw-bold">Login</a> instead?
+    </div>
+
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)">
+
+        <mat-form-field appearance="standard">
+          <mat-label for="username">Fisr Name</mat-label>
+          <input matInput formControlName="firstName" name="firstName" type="text" autofocus required />
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label for="lastName">Last Name</mat-label>
+          <input matInput formControlName="lastName" name="lastName" type="text" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label for="email">Email</mat-label>
+          <mat-error *ngIf="getControl('email')?.errors?.['email']">Invalid Email</mat-error>
+          <input matInput formControlName="email" name="email" type="text" required />
+        </mat-form-field>
+
+
+        <mat-form-field appearance="standard">
+          <mat-label for="password">Password</mat-label>
+          <mat-error *ngIf="signupForm.errors?.['misMatch']">Password does not match</mat-error>
+          <input matInput formControlName="password" name="password" type="text" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label for="confirmPassword">Confirm Password</mat-label>
+          <mat-error *ngIf="signupForm.errors?.['misMatch']">Password does not match</mat-error>
+          <input matInput formControlName="confirmPassword" name="confirmPassword" type="text" required />
+        </mat-form-field>
+
+        <span (mouseenter)="mouseOverSignUp=true;" (mouseleave)="mouseOverSignUp=false;">
+          <button class="btn btn-primary me-3" mat-raised-button color="primary"
+            [disabled]="signupForm.invalid">SignUp</button>
+        </span>
+        <button class="btn btn-secondary" mat-raised-button (click)="cancel()">Cancel</button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
