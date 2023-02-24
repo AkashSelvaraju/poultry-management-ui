@@ -6,7 +6,7 @@ import { IUser } from 'src/app/common/interface';
     templateUrl: './profile-popup.component.html',
     styleUrls: ['./profile-popup.component.css'],
 })
-export class UserProfilePopupComponent implements OnInit {
+export class ProfilePopupComponent implements OnInit {
     @Input() user!: IUser;
     @Output() logout: EventEmitter<void> = new EventEmitter();
     constructor() {}

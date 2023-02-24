@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { errorHandler } from '../common/error/errorhandler';
-import { IHobby, IRole, IUser } from '../common/interface/user';
+import { errorHandler } from '../error/errorhandler';
+import { IHobby, IRole, IUser } from '../interface/user';
 
 @Injectable()
 export class UserService {
@@ -55,25 +55,6 @@ export class UserService {
                 }),
             })
             .pipe(catchError(errorHandler<IUser[]>('getAllUsers')));
-    }
-
-    getHobbies(userId: string): Observable<IHobby[]> {
-        return this.http
-            .get<IHobby[]>(`/api/users/${userId}/hobbies`, {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                }),
-            })
-            .pipe(catchError(errorHandler<IHobby[]>(`getHobbies:${userId}`)));
-    }
-    getAllHobbies(): Observable<IHobby[]> {
-        return this.http
-            .get<IHobby[]>(`/api/users/hobbies/all`, {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                }),
-            })
-            .pipe(catchError(errorHandler<IHobby[]>('getAllHobbies')));
     }
 
     getRoles(userId: string): Observable<IRole[]> {

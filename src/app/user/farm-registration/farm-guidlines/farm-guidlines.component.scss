@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+}
+
+.mat-column-question {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    width: 68% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.mat-column-sno {
+    width: 5% !important;
+}
+
+.mat-column-answer {
+    width: fit-content !important;
+}

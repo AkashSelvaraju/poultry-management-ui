@@ -23,6 +23,8 @@ export class FarmDetailsComponent implements OnInit {
         let address = this.fb.group({
             address1: '',
             address2: '',
+            taluk: '',
+            district: '',
             state: '',
             pincode: ['', [Validators.maxLength(6), Validators.minLength(6)]],
         });

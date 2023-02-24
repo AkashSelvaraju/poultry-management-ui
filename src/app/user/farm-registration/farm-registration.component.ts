@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-registration',
-    templateUrl: './registration.component.html',
-    styleUrls: ['./registration.component.scss'],
+    templateUrl: './farm-registration.component.html',
+    styleUrls: ['./farm-registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
-    step2!: FormGroup;
-
+export class FarmRegistrationComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit(): void {}

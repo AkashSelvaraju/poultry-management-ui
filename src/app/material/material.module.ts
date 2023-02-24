@@ -12,6 +12,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const MaterialComponents: any = [
     MatButtonModule,
@@ -27,6 +30,9 @@ const MaterialComponents: any = [
     MatStepperModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatSidenavModule,
 ];
 
 @NgModule({

@@ -1,6 +1,8 @@
 .profile-btn {
     color: white;
+    height: 64px;
     padding: 10px;
+    background-color: var(--bs-pink);
     font-size: medium;
     cursor: pointer;
 }

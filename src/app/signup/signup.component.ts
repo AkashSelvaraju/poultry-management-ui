@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 import { ErrorCodes } from 'src/app/common/error';
 import { AuthService } from 'src/app/common/service';
-import { UserService } from '../user.service';
+import { UserService } from '../common/service/user.service';
 
 @Component({
     templateUrl: './signup.component.html',

@@ -1,100 +1,38 @@
-<div class="col-md-8">
-  <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <em
-        *ngIf="profileForm.controls['firstName']?.invalid &&(profileForm.controls['firstName']?.touched ||mouseOverSave)">
-        Required</em>
-      <input class="form-control" name="firstName" formControlName="firstName" placeholder="First Name" autofocus
-        required />
-    </div>
-
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <em
-        *ngIf="profileForm.controls['lastName']?.invalid && (profileForm.controls['lastName']?.touched || mouseOverSave)">
-        Required
-      </em>
-      <input class="form-control" name="lastName" formControlName="lastName" placeholder="Last Name" required />
-    </div>
-
-    <div class="form-group-lg mb-3" formArrayName="hobbies">
-      <hr>
-      <h4>Hobbies:</h4>
-      <div class="form-check form-check-inline" *ngFor="let hobby of all_hobbies; let i = index">
-        <input class="form-check-input" name="hobby-{{ hobby.id }}" formControlName="{{ i }}" type="checkbox"
-          value="{{ hobby.id }}" />
-        <label class="form-check-label" for="hobby-{{ hobby.id }}">{{
-          hobby.name
-          }}</label>
+<mat-grid-list cols="1" rowHeight="300px">
+  <mat-grid-tile>
+    <div class="mygrid">
+      <div class="profile-header">
+        <div class="profile-avatar mat-display-2">{{user.firstName[0] |
+          uppercase}}{{user.lastName[0] | uppercase}}
+        </div>
+        <div class="mat-title mb-0">
+          <span>{{user.firstName}} {{user.lastName}}</span>
+        </div>
+        <div class="mat-caption">{{user.email}}</div>
       </div>
     </div>
-
-    <div class="form-group-lg mb-3" formArrayName="roles">
-      <hr>
-      <h4>Roles:</h4>
-      <div class="form-check form-check-inline" *ngFor="let role of all_roles; let i = index">
-        <input class="form-check-input" name="role-{{ role.id }}" formControlName="{{ i }}" type="checkbox" />
-        <label class="form-check-label" for="role-{{ role.id }}">{{role.name}}</label>
-      </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="col-md-10">
+      <mat-accordion>
+        <div class="ms-3 mat-title">Your poultry farms:</div>
+        <mat-expansion-panel *ngFor="let farm of userFarms" expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{farm.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{farm.status.display}}
+              <mat-icon class="ms-3" [ngStyle]="{color:farm.status.color}">{{farm.status.icon}}</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div [ngSwitch]="farm.status.code">
+            <div *ngSwitchCase="0">{{farm.name}} has been successfully registered and lisenced</div>
+            <div *ngSwitchCase="1">{{farm.name}} is under review</div>
+            <div *ngSwitchCase="2">Payment is pending for {{farm.name}} </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
-
-    <div class="form-group" *ngIf="showEditPassword" formGroupName="editPassword">
-      <hr>
-      <h4>Change Password:</h4>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <em *ngIf="editPassword.controls['password']?.errors?.['required'] &&
-           (editPassword.controls['password']?.touched || mouseOverSave) && !incorrectPassword">Required</em>
-        <em *ngIf="incorrectPassword">Password Incorrect</em>
-        <input class="form-control" name="password" formControlName="password" placeholder="Current Password"
-          required />
-      </div>
-
-      <div class="form-group">
-        <label for="newPassword">New Password</label>
-        <span
-          *ngIf="(profileForm.errors?.['misMatch'] || editPassword.get('newPassword')?.invalid) &&
-                                                             (editPassword.controls['newPassword']?.touched || mouseOverSave)">
-          <em *ngIf="editPassword.controls['newPassword']?.errors?.['required']">Required</em>
-          <em *ngIf="profileForm.errors?.['misMatch'] &&
-             !editPassword.controls['confirmPassword']?.errors?.['required']">
-            Password does not match
-          </em>
-        </span>
-        <input class="form-control" name="newPassword" formControlName="newPassword" placeholder="New Password"
-          required />
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <span *ngIf="(profileForm.errors?.['misMatch'] || editPassword.get('confirmPassword')?.invalid) &&
-                                             (editPassword.get('confirmPassword')?.touched || mouseOverSave)">
-          <em *ngIf="editPassword.controls['confirmPassword']?.errors?.['required']">Required</em>
-          <em *ngIf="profileForm.errors?.['misMatch'] &&
-            !editPassword.controls['confirmPassword']?.errors?.['required'] ">
-            Password does not match
-          </em>
-        </span>
-        <input class="form-control" name="confirmPassword" formControlName="confirmPassword"
-          placeholder="Confirm Password" required />
-      </div>
-    </div>
-    <span (mouseenter)="mouseOverSave = true" (mouseleave)="mouseOverSave = false">
-      <button class="btn btn-primary me-3" [disabled]="profileForm.invalid">
-        Save
-      </button>
-    </span>
-    <a *ngIf="!showEditPassword" class="btn btn-secondary" routerLink="/home">Cancel</a>
-    <button *ngIf="showEditPassword" class="btn btn-secondary" (click)="removeEditPassword()">
-      Cancel
-    </button>
-  </form>
-  <div class="mt-3" *ngIf="!showEditPassword">
-    <span>
-      Edit
-      <a class="fw-bold" (click)="addEditPassword()">Password</a>?
-    </span>
-  </div>
-</div>
+  </mat-grid-tile>
+</mat-grid-list>

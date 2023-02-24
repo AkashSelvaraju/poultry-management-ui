@@ -1,5 +1,5 @@
 <div *ngIf="!!user">
-  <a class="profile-btn" [mat-menu-trigger-for]="profileMenu">Welcome
+  <a mat-button [mat-menu-trigger-for]="profileMenu">Welcome
     {{user.firstName}}</a>
   <mat-menu #profileMenu="matMenu" class="user-profile">
     <div class="profile-header">

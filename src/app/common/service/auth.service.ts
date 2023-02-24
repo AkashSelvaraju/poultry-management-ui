@@ -6,10 +6,11 @@ import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { errorHandler } from '../error';
 import { IUser } from '../interface';
 
+const PERMISSIONS = { ADMIN: 4, DOCTOR: 1, USER: 2 };
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     currentUser: BehaviorSubject<IUser | undefined>;
-    isLoggedin: boolean = false;
 
     constructor(private http: HttpClient) {
         this.currentUser = new BehaviorSubject<IUser | undefined>(undefined);
@@ -17,21 +18,32 @@ export class AuthService {
 
     private setCurrentUser(user?: IUser) {
         this.currentUser.next(user);
-        this.isLoggedin = this.currentUser.value ? true : false;
     }
 
     isAuthenticated() {
-        return this.isLoggedin;
+        return !!this.currentUser.value;
     }
 
     isAdmin(): boolean {
         if (this.currentUser.value)
-            return !!(this.currentUser.value.permission & 2);
+            return !!(this.currentUser.value.permission & PERMISSIONS.ADMIN);
+        return false;
+    }
+
+    isUser(): boolean {
+        if (this.currentUser.value)
+            return !!(this.currentUser.value.permission & PERMISSIONS.USER);
+        return false;
+    }
+
+    isDoctor(): boolean {
+        if (this.currentUser.value)
+            return !!(this.currentUser.value.permission & PERMISSIONS.DOCTOR);
         return false;
     }
 
     loginUser(username: string, password: string): Observable<boolean> {
-        if (this.isLoggedin) this.logoutUser().subscribe();
+        if (this.isAuthenticated()) this.logoutUser().subscribe();
 
         let options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -43,7 +55,7 @@ export class AuthService {
             .pipe(
                 map((user: IUser) => {
                     this.setCurrentUser(user);
-                    return this.isLoggedin;
+                    return this.isAuthenticated();
                 }),
                 catchError(errorHandler<boolean>('loginUser'))
             );
@@ -69,7 +81,7 @@ export class AuthService {
             tap((user: IUser) => {
                 if (user instanceof Object) this.setCurrentUser(user);
             }),
-            map((user) => !!user),
+            map(() => this.isAuthenticated()),
             catchError(errorHandler('checkAuthentication', false))
         );
     }
